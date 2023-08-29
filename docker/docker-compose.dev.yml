@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  nats:
+    container_name: nats
+    ports:
+      - '4222:4222'
+      - '6222:6222'
+      - '8222:8222'
+    image: nats
+    labels:
+      kompose.service.type: nodeport
+      kompose.service.expose: 'true'
+      kompose.image-pull-policy: 'Always'
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    restart: always
+    ports:
+      - '27017:27017'
+    expose:
+      - 27017
+
+  redis:
+    container_name: redis
+    image: redis
+    restart: always
+    ports:
+      - '6379:6379'
+    expose:
+      - 6379

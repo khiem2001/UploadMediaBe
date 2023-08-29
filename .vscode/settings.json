@@ -1,0 +1,35 @@
+{
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+    "cSpell.words": [
+        "BOTTOMLEFT",
+        "BOTTOMRIGHT",
+        "CENTERLEFT",
+        "CENTERRIGHT",
+        "DEACTIVE",
+        "GROUPMETADATA",
+        "MONGODB",
+        "Microservice",
+        "TEXTARRAY",
+        "TOPLEFT",
+        "TOPRIGHT",
+        "Transcoding",
+        "YOUTUBE",
+        "casl",
+        "dtos",
+        "kompose",
+        "microservices",
+        "nats",
+        "nestjs",
+        "nodeport",
+        "ovpdb",
+        "typeorm",
+        "ytdl"
+    ],
+    "[graphql]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}

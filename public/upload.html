@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <title>Resumable Upload Example</title>
+
+    <!-- Uppy Uploader CSS -->
+    <link
+      href="https://releases.transloadit.com/uppy/v1.29.1/uppy.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <h1>Resumable Upload Example</h1>
+    <!-- <input type="file" name="upload" /> -->
+
+    <div class="grid">
+      <div class="column-full">
+        <div class="UppyInput"></div>
+        <div class="UppyInput-Progress"></div>
+      </div>
+    </div>
+
+    <!-- Uppy Uploader JS -->
+    <script src="https://releases.transloadit.com/uppy/v1.29.1/uppy.min.js"></script>
+    <script>
+      var uppy = Uppy.Core()
+        .use(Uppy.Dashboard, {
+          inline: true,
+          target: '.UppyInput',
+        })
+        .use(Uppy.Tus, {
+          headers: {
+            //Authorization: `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN1cHBlcmFkbWluQGdtYWlsLmNvbSIsImZ1bGxOYW1lIjoiQWRtaW4iLCJ1aWQiOiI2MDgyODYyOTRlOTdlYTU4OTEyOTk5M2IiLCJpYXQiOjE2MTkxNzA4MDEsImV4cCI6MTYyMTc2MjgwMX0.JtUmbQKk27-0TtPLjmo8tjcExcxWRGYmzZm5W0G45E8`,
+            Authorization: `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhb2R1YzM1NEBnbWFpbC5jb20iLCJmdWxsTmFtZSI6IkNhbyBBbmggRHVjIiwiY2xpZW50SWQiOiJmNDgyNTM5NmI4NmRjNDIzNDE2NjQxNWI5MjE2ZTVjNSIsInVpZCI6IjY0YmY1NGQwMzA4YzkwMjM0MDY0MjE5ZCIsImlhdCI6MTY5MTU3MDMwMiwiZXhwIjoxNjk0MTYyMzAyfQ.mV8ivj0ftwLqcK5oSUKtqA-1LJvNI8kaztD59q1kFdY`,
+          },
+          removeFingerprintOnSuccess: true,
+          //endpoint: 'http://127.0.0.1:5001/files/',
+          //endpoint: 'https://api-uploader.dev.ovp.comartek.com/create/video/',
+          endpoint: 'http://localhost:5001/upload/files/',
+          //endpoint: 'http://127.0.0.1:5001/update/media/video/'
+          //endpoint: 'http://127.0.0.1:5001/update/avatar/transcode'
+        })
+        .use(Uppy.GoogleDrive, {
+          target: Uppy.Dashboard,
+          companionUrl: 'http://localhost:5001/companion',
+        })
+        .use(Uppy.Facebook, {
+          target: Uppy.Dashboard,
+          companionUrl: 'http://localhost:5001/companion',
+        })
+        .use(Uppy.Url, {
+          target: Uppy.Dashboard,
+          companionUrl: 'http://localhost:5001/companion',
+        });
+
+      //uppy.setMeta({ projectId: '609e3b0d0c5add4d80e5c20a', uid: '608286294e97ea589129993b'})
+      uppy.on('file-added', function (file) {
+        uppy.setFileMeta(file?.id, { fingerPrint: file?.id });
+        // console.log('file added', file.size);
+      });
+
+      uppy.setMeta({
+        projectId: '64c76f090dff4b0bd45d37ef',
+        uid: '64bf54d0308c90234064219d',
+      });
+      uppy.on('complete', (result) => {
+        console.log(
+          'Upload complete! We’ve uploaded these files:',
+          result.successful,
+        );
+      });
+    </script>
+  </body>
+</html>
